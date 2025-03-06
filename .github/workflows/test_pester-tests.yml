@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@latest
+        uses: actions/checkout
 
       - name: Set up PowerShell
         run: |
@@ -26,14 +26,14 @@ jobs:
           pwsh -command "Invoke-Pester -Path ./tests -OutputFormat NUnitXml -OutputFile ./test-results/test-results.xml"
 
       - name: Publish test results
-        uses: actions/upload-artifact@latest
+        uses: actions/upload-artifact
         with:
           name: test-results
           path: ./test-results/test-results.xml
 
       - name: Display test results
         if: always()
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter
         with:
           name: Pester Tests
           path: ./test-results/test-results.xml
