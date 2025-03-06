@@ -39,4 +39,3 @@ jobs:
           name: Pester Tests
           path: ./test-results/test-results.xml
           reporter: nunit
-.
