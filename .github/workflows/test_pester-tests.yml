@@ -26,7 +26,7 @@ jobs:
           pwsh -command "Invoke-Pester -Path ./tests -OutputFormat NUnitXml -OutputFile ./test-results/test-results.xml"
 
       - name: Publish test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: test-results
           path: ./test-results/test-results.xml
