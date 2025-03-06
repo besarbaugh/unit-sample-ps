@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu-24.04
 
     steps:
     - name: Checkout code
@@ -16,15 +16,11 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Checkout repository code
-      run: |
-        echo "Checking out repository code..."
-
     - name: Install PowerShell
       run: |
         echo "Installing PowerShell Core..."
         sudo apt-get update
-        sudo apt-get install -y powershell
+        sudo apt-get install -y pwsh
         pwsh --version
 
     - name: Install Pester
@@ -38,7 +34,7 @@ jobs:
       shell: pwsh
       run: |
         Write-Output "Starting Pester tests..."
-        $results = Invoke-Pester -Path "FileOperations.Tests.ps1" -CodeCoverage "FileOperations.ps1" -OutputFile "test-results.xml" -OutputFormat NUnitXml -PassThru -Verbose
+        $results = Invoke-Pester -Path "TaskManager.tests.ps1" -CodeCoverage "TaskManager.ps1" -OutputFile "test-results.xml" -OutputFormat NunitXML -PassThru -Verbosity Detailed
         Write-Output "Test Summary:"
         Write-Output "  Passed: $($results.PassedCount)"
         Write-Output "  Failed: $($results.FailedCount)"
